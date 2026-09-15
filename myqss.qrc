@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>qrc/qss/blacksoft.css</file>
+        <file>qrc/qss/flatgray.css</file>
+        <file>qrc/qss/lightblue.css</file>
+        <file>qrc/qss/lightblue_copy.css</file>
+        <file>qrc/qss/flatgray/add_bottom.png</file>
+        <file>qrc/qss/flatgray/add_left.png</file>
+        <file>qrc/qss/flatgray/add_right.png</file>
+        <file>qrc/qss/flatgray/add_top.png</file>
+        <file>qrc/qss/flatgray/arrow_bottom.png</file>
+        <file>qrc/qss/flatgray/arrow_left.png</file>
+        <file>qrc/qss/flatgray/arrow_right.png</file>
+        <file>qrc/qss/flatgray/arrow_top.png</file>
+        <file>qrc/qss/flatgray/branch_close.png</file>
+        <file>qrc/qss/flatgray/branch_open.png</file>
+        <file>qrc/qss/flatgray/calendar_nextmonth.png</file>
+        <file>qrc/qss/flatgray/calendar_prevmonth.png</file>
+        <file>qrc/qss/flatgray/checkbox_checked.png</file>
+        <file>qrc/qss/flatgray/checkbox_checked_disable.png</file>
+        <file>qrc/qss/flatgray/checkbox_parcial.png</file>
+        <file>qrc/qss/flatgray/checkbox_parcial_disable.png</file>
+        <file>qrc/qss/flatgray/checkbox_unchecked.png</file>
+        <file>qrc/qss/flatgray/checkbox_unchecked_disable.png</file>
+        <file>qrc/qss/flatgray/menu_checked.png</file>
+        <file>qrc/qss/flatgray/radiobutton_checked.png</file>
+        <file>qrc/qss/flatgray/radiobutton_checked_disable.png</file>
+        <file>qrc/qss/flatgray/radiobutton_unchecked.png</file>
+        <file>qrc/qss/flatgray/radiobutton_unchecked_disable.png</file>
+    </qresource>
+</RCC>
