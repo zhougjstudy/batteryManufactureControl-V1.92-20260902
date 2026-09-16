@@ -161,7 +161,8 @@ typedef struct _infor
     uint32_t VoltDetect_lower;
     uint32_t VoltDetect_upper;
     uint32_t CurVarify;
-    uint32_t CurVarifyDelay;
+    uint32_t CurVarifyDelay=6;
+//    uint32_t CurVarifyDelay;
     uint32_t CurDetect_lower;
     uint32_t CurDetect_upper;
     uint32_t VoltDiff_lower;
@@ -396,6 +397,7 @@ public:
    uint8_t RTC_Minute;
    uint8_t RTC_Second;
    uint8_t CurCali_timeout_count = 0;
+//   uint32_t CurCali_timeout_count = 0;
    uint8_t  AutoTestStatus=0;
    bool BMSConnectIsOk = 0; //BMS连接成功
    bool DBConnectIsOk = 0;  //数据库连接成功

@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab1">
      <attribute name="title">
@@ -2893,7 +2893,7 @@
       <property name="title">
        <string>电流校准设置</string>
       </property>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="checkBoxAutoCurCali">
        <property name="geometry">
         <rect>
          <x>20</x>
