@@ -59,6 +59,8 @@ BMCMainWindow::BMCMainWindow(QWidget *parent)
 
     timer_CurCali=new QTimer;
     connect(timer_CurCali, SIGNAL(timeout()), this, SLOT(CurCali_callback()));
+    timer_AutoCurCali = new QTimer;
+    connect(timer_AutoCurCali, SIGNAL(timeout()), this, SLOT(AutoCurCali_check()));
 
     connect(ui->textBrowserTestInfo, SIGNAL(cursorPositionChanged()), this, SLOT(autoScroll()));
 
@@ -616,6 +618,7 @@ void BMCMainWindow::keyPressEvent(QKeyEvent *keyValue)
             BarCodeIsAccept = 1;
             barStr.clear();
             Scaned = 1;
+            BarCodeProcess();
             //DataBaseInsert();
         }else{
             barStr += keyValue->text();
@@ -6264,6 +6267,10 @@ void BMCMainWindow::on_pushButtonCurCali_clicked()
         //此处不知道为什么，点击校准后，要延时很久才能真正校准
        ui->textBrowserTestInfo->append("电流校准前请将负载仪放电电流设置好！");
        CurCali_timeout_count = Bms_cfg_infor.CurVarifyDelay;
+       if (ui->checkBoxAutoCurCali->isChecked())
+       {
+           timer_AutoCurCali->start(1000);
+       }
        timer_CurCali->start(1000);
        QString str = QString::number(CurCali_timeout_count,10);
        str.append("...");
@@ -6323,6 +6330,58 @@ void BMCMainWindow::ParameterDetect_callback(void)
     paraDetect_end = 1; // <-- 【修改】使用新的标志位
 }
 
+//void BMCMainWindow::CurCali_callback(void)
+//{
+//    if (CurCali_timeout_count > 0)
+//    {
+//        CurCali_timeout_count--;
+//    }
+
+//    if (CurCali_timeout_count >= 0)
+//    {
+//        QString str = QString::number(CurCali_timeout_count, 10);
+//        str.append("...");
+//        ui->textBrowserTestInfo->insertPlainText(str);
+//    }
+//    else
+//    {
+//        ui->textBrowserTestInfo->insertPlainText("...");
+//    }
+
+//    if (ui->checkBoxAutoCurCali->isChecked())
+//    {
+//        int curValue = Bms_infor_upload.BMSinfor.PackCurrent;
+//        double baseValue = ui->doubleSpinBoxBaseValue->value();
+//        double offsetValue = ui->doubleSpinBoxOffset->value();
+
+//        if (curValue >= (int)(baseValue - offsetValue) && curValue <= (int)(baseValue + offsetValue))
+//        {
+//            timer_CurCali->stop();
+//            ui->textBrowserTestInfo->append("\n电流值 " + QString::number(curValue) + "mA 已进入设定范围[" + QString::number((int)(baseValue - offsetValue)) + "mA, " + QString::number((int)(baseValue + offsetValue)) + "mA]，自动触发校准...");
+//            btnStartCurCali = true;
+//            on_pushButton_StartCurCali_clicked();
+//            return;
+//        }
+
+//        if (CurCali_timeout_count <= 0)
+//        {
+//            if (CurCali_timeout_count == 0)
+//            {
+//                CurCali_timeout_count = -1;
+//            }
+//            return;
+//        }
+//    }
+//    else
+//    {
+//        if (CurCali_timeout_count <= 0)
+//        {
+//            timer_CurCali->stop();
+
+//            btnStartCurCali = true;
+//        }
+//    }
+//}
 void BMCMainWindow::CurCali_callback(void)
 {
     CurCali_timeout_count--;
@@ -6332,17 +6391,115 @@ void BMCMainWindow::CurCali_callback(void)
 
     if (CurCali_timeout_count == 0)
     {
-        timer_CurCali->stop(); // 停止倒计时
+        timer_CurCali->stop();
 
-//        ui->textBrowserTestInfo->append("\n倒计时结束，请按【开始电流校准】按钮继续...");
-
-        // 启用“开始电流校准”按钮
-//        ui->pushButton_StartCurCali->setEnabled(true);
-
-        // 设置标志位，表示我们现在可以开始电流校准了
         btnStartCurCali = true;
     }
 }
+void BMCMainWindow::AutoCurCali_check(void)
+{
+    int curValue = Bms_infor_upload.BMSinfor.PackCurrent;
+    double baseValue = ui->doubleSpinBoxBaseValue->value();
+    double offsetValue = ui->doubleSpinBoxOffset->value();
+
+    if (curValue >= (int)(baseValue - offsetValue) && curValue <= (int)(baseValue + offsetValue))
+    {
+        timer_AutoCurCali->stop();
+        timer_CurCali->stop();
+        ui->textBrowserTestInfo->append("电流值：" + QString::number(curValue) + "mA进入设定范围[" + QString::number((int)(baseValue - offsetValue)) + "mA, " + QString::number((int)(baseValue + offsetValue)) + "mA]，触发校准...");
+        btnStartCurCali = true;
+        on_pushButton_StartCurCali_clicked();
+    }
+}
+//void BMCMainWindow::CurCali_callback(void)
+//{
+////    CurCali_timeout_count--;
+//    if (CurCali_timeout_count > 0)           // ← 改1: 只在>0时减1
+//    {
+//        CurCali_timeout_count--;
+//    }
+//    QString str = QString::number(CurCali_timeout_count, 10);
+//    str.append("...");
+//    ui->textBrowserTestInfo->insertPlainText(str);
+
+//    if (ui->checkBoxAutoCurCali->isChecked())
+//    {
+//        int curValue = Bms_infor_upload.BMSinfor.PackCurrent;
+//        double baseValue = ui->doubleSpinBoxBaseValue->value();
+//        double offsetValue = ui->doubleSpinBoxOffset->value();
+
+////        if (curValue >= (int)(baseValue - offsetValue) && curValue <= (int)(baseValue + offsetValue))
+////        {
+////            timer_CurCali->stop();
+////            ui->textBrowserTestInfo->append("\n电流值 " + QString::number(curValue) + "mA 已进入设定范围[" + QString::number((int)(baseValue - offsetValue)) + "mA, " + QString::number((int)(baseValue + offsetValue)) + "mA]，自动触发校准...");
+////            btnStartCurCali = true;
+////            on_pushButton_StartCurCali_clicked();
+////            return;
+////        }
+//        if (curValue >= (int)(baseValue - offsetValue) && curValue <= (int)(baseValue + offsetValue))
+//        {
+//            timer_CurCali->stop();
+//            ui->textBrowserTestInfo->append("\n电流值 " + QString::number(curValue) + "mA 已进入设定范围[...]，自动触发校准...");
+//            btnStartCurCali = true;
+//            on_pushButton_StartCurCali_clicked();
+//            return;
+//        }
+
+//        if (CurCali_timeout_count == 0)      // ← 改2: auto模式到0不停止
+//        {
+//            return;                          // 继续跑定时器，等待电流进入范围
+//        }
+//    }
+
+//    if (CurCali_timeout_count == 0)
+//    {
+//        timer_CurCali->stop(); // 停止倒计时
+
+////        ui->textBrowserTestInfo->append("\n倒计时结束，请按【开始电流校准】按钮继续...");
+
+//        // 启用“开始电流校准”按钮
+////        ui->pushButton_StartCurCali->setEnabled(true);
+
+//        // 设置标志位，表示我们现在可以开始电流校准了
+//        btnStartCurCali = true;
+//    }
+//}
+//void BMCMainWindow::CurCali_callback(void)
+//{
+//    CurCali_timeout_count--;
+//    QString str = QString::number(CurCali_timeout_count, 10);
+//    str.append("...");
+//    ui->textBrowserTestInfo->insertPlainText(str);
+
+//    if (ui->checkBoxAutoCurCali->isChecked())
+//    {
+//        int curValue = Bms_infor_upload.BMSinfor.PackCurrent;
+//        double baseValue = ui->doubleSpinBoxBaseValue->value();
+//        double offsetValue = ui->doubleSpinBoxOffset->value();
+
+//        if (curValue >= (int)(baseValue - offsetValue) && curValue <= (int)(baseValue + offsetValue))
+//        {
+//            timer_CurCali->stop();
+//            ui->textBrowserTestInfo->append("\n电流值 " + QString::number(curValue) + "mA 已进入设定范围[" + QString::number((int)(baseValue - offsetValue)) + "mA, " + QString::number((int)(baseValue + offsetValue)) + "mA]，自动触发校准...");
+//            btnStartCurCali = true;
+//            on_pushButton_StartCurCali_clicked();
+//            return;
+//        }
+//    }
+
+//    if (CurCali_timeout_count == 0)
+//    {
+//        timer_CurCali->stop(); // 停止倒计时
+
+////        ui->textBrowserTestInfo->append("\n倒计时结束，请按【开始电流校准】按钮继续...");
+
+//        // 启用“开始电流校准”按钮
+////        ui->pushButton_StartCurCali->setEnabled(true);
+
+//        // 设置标志位，表示我们现在可以开始电流校准了
+//        btnStartCurCali = true;
+//    }
+//}
 
 //void BMCMainWindow::CurCali_callback(void)
 //{
@@ -6893,6 +7050,7 @@ void BMCMainWindow::on_pushButton_StartCurCali_clicked()
        // 电流正常，发送校准指令
        ui->textBrowserTestInfo->append("\n开启电流校准...");
        CurrentCaliEnable = 1;
+       timer_AutoCurCali->stop();
     }
 }
 //void BMCMainWindow::on_pushButton_StartCurCali_clicked()

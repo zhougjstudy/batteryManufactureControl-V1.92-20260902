@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2026-09-15T19:29:17. -->
+<!-- Written by QtCreator 4.11.1, 2026-09-24T15:54:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -201,9 +201,8 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">batteryManufactureControl2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/zgj/soft_Spard_Sbs/manufacturePCSoftware_btnTohint/manufacturePCSoftware_btnTohint/batteryManufactureControl-V1.92-20260902/batteryManufactureControl.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/zgj/soft_Spard_Sbs/manufacturePCSoftware_btnTohint/manufacturePCSoftware_btnTohint/batteryManufactureControl-V1.92-20260902/batteryManufactureControl.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/zgj/soft_Spard_Sbs/manufacturePCSoftware_btnTohint/manufacturePCSoftware_btnTohint/batteryManufactureControl-V1.92-20260902-test/batteryManufactureControl.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/zgj/soft_Spard_Sbs/manufacturePCSoftware_btnTohint/manufacturePCSoftware_btnTohint/batteryManufactureControl-V1.92-20260902-test/batteryManufactureControl.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

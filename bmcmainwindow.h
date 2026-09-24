@@ -179,8 +179,8 @@ typedef struct _infor
 
     QString CalbTime;
     QString ELECWORKSHOPSteps="110111111";
-    QString PACKWORKSHOPSteps="001111000";
-    QString WRAPWORKSHOPSteps="001111000";
+    QString PACKWORKSHOPSteps="001111001";
+    QString WRAPWORKSHOPSteps="001111001";
     infor_form_bms BMSinfor;
 }infor_form_txt;
 
@@ -333,6 +333,7 @@ public:
    QTimer* my_time;
    QTimer* timer_paradect;
    QTimer* timer_CurCali;
+   QTimer* timer_AutoCurCali;
    infor_form_txt Bms_cfg_infor;
    infor_to_upload Bms_infor_upload;
    QString barStr;
@@ -473,6 +474,7 @@ private slots:
    void MyFunction_Timeout(void);
    void ParameterDetect_callback(void);
    void CurCali_callback(void);
+   void AutoCurCali_check(void);
    void autoScroll(void);
    void on_btnComOpen_clicked();
    void on_comboBoxProductSel_currentIndexChanged(int index);

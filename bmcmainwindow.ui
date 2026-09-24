@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab1">
      <attribute name="title">
@@ -2932,7 +2932,7 @@
         <string>±mA</string>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox">
+      <widget class="QDoubleSpinBox" name="doubleSpinBoxBaseValue">
        <property name="geometry">
         <rect>
          <x>49</x>
@@ -2951,7 +2951,7 @@
         <double>-2000.000000000000000</double>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+      <widget class="QDoubleSpinBox" name="doubleSpinBoxOffset">
        <property name="geometry">
         <rect>
          <x>243</x>
